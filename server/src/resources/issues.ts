@@ -1,54 +1,30 @@
-import Issue from '../model/issue';
+import { Issue, IssueModel } from "../model/issue";
+import * as mongoose from "mongoose";
 
 const uuidv4 = require("uuid/v4");
 
-let issues: Issue[] = [
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://google.fr', label: 'Mauvaise couleur', description: 'blablablabla', publishedDate: new Date()},
-    {id: uuidv4(), applicationUrl: 'http://zenika.com', label: 'C\est moche le noir', description: 'blablablabla', publishedDate: new Date()},
-];
+exports.getAll = function(page = 0, size = 10, callback: (err: any) => void) {
+  IssueModel.find({}, {}, { skip: page * size, limit: size }, callback);
+};
 
-exports.getAll = function(page = 0, size: number){
-    if(!size){
-        return issues;
-    }
-    return issues.slice(page * size, (page + 1) * size);
-}
+exports.getById = function(id: string, callback: (err: any) => void) {
+  const query = IssueModel.findById(new mongoose.Types.ObjectId(id));
+  query.exec(callback);
+};
 
-exports.getById = function(id: string){
-    return issues.find(issue => issue.id === id);
-}
+exports.update = function(
+  id: string,
+  issue: Issue,
+  callback: (err: any) => void
+) {
+  IssueModel.update({ _id: new mongoose.Types.ObjectId(id) }, issue, callback);
+};
 
-exports.update = function(id: string, issue: Issue){
-    return issues = issues.map(i => i.id === id ? issue : i);
-}
+exports.save = function(issue: Issue, callback: (err: any) => void) {
+  const issueModel = new IssueModel(issue);
+  issueModel.save(callback);
+};
 
-exports.save = function(issue: Issue){
-    return issues.push(issue);
-}
-
-exports.delete = function(id: string){
-    issues = issues.filter(issue => issue.id !== id)
-    return issues;
-}
+exports.delete = function(id: string, callback: (err: any) => void) {
+  IssueModel.remove({ _id: new mongoose.Types.ObjectId(id) }, callback);
+};
