@@ -53,6 +53,7 @@
 </template>
 
 <script>
+/* import presentation from './Presentation.vue' */
 export default {
   name: 'hello',
   data () {
