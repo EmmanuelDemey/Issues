@@ -6,13 +6,15 @@ export interface Issue {
   label: string;
   description: string;
   publishedDate: Date;
+  active: boolean
 }
 
 export const IssueSchema = new mongoose.Schema({
   applicationUrl: String,
   label: String,
   description: String,
-  publishedDate: { type: Date, default: Date.now }
+  publishedDate: { type: Date, default: Date.now },
+  active: {type: Boolean, default: false}
 });
 
 export const IssueModel = mongoose.model("issues2", IssueSchema);
