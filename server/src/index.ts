@@ -38,11 +38,6 @@ class Server {
         parseInt(req.query.page),
         parseInt(req.query.size),
         (err: Error, response: Issue[]) => {
-          if (err) {
-            res.sendStatus(500);
-          } else {
-            res.json(response);
-          }
           res.json(response);
         }
       );
@@ -53,13 +48,7 @@ class Server {
       res: express.Response
     ) {
       issues.getById(req.params.id, (err: Error, response: Issue) => {
-        if (err) {
-          res.sendStatus(500);
-        } else if(!response){
-          res.sendStatus(404);
-        } else {
-          res.json(response);
-        }
+        res.json(response);
       });
     });
 
@@ -71,11 +60,7 @@ class Server {
         req.params.id,
         req.body,
         (err: Error, response: Issue[]) => {
-          if (err) {
-            res.sendStatus(500);
-          } else {
-            res.sendStatus(200);
-          }
+          res.sendStatus(200);
         }
       );
     });
@@ -85,11 +70,7 @@ class Server {
       res: express.Response
     ) {
       issues.save(req.body, (err: Error) => {
-        if (err) {
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(201);
-        }
+        res.sendStatus(201);
       });
     });
 
@@ -98,11 +79,7 @@ class Server {
       res: express.Response
     ) {
       issues.delete(req.params.id, (err: Error) => {
-        if (err) {
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(200);
-        }
+        res.sendStatus(200);
       });
     });
 
