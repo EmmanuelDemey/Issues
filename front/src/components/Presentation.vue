@@ -6,7 +6,7 @@
       <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
         <div class="mdl-card__supporting-text">
           <h4>{{issue.label}}</h4>
-          {{issue.description}} 
+          {{issue.description}}
         </div>
         <div class="mdl-card__actions">
           <a href="#" class="mdl-button">Read our features</a>
@@ -34,7 +34,6 @@ export default {
   },
   data () {
     return {
-
     }
   }
 }

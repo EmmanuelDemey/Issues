@@ -6,10 +6,15 @@
       </br>
     </div>
     <paginate
-      :page-count="4"
-      :prev-text="'Précédent'"
-      :next-text="'Suivant'"
-      :containerClass="'ui pagination menu'">
+    :page-count="numberPages"
+    :margin-pages="4"
+    :page-range="4"
+    :initial-page="0"
+    :container-class="'ui pagination menu'"
+    :page-link-class="'item'"
+    :prev-link-class="'item'"
+    :next-link-class="'item'"
+    :no-li-surround="true">
     </paginate>
   </div>
   </div>
@@ -36,6 +41,7 @@ export default {
     loadData () {
       axios.get('http://localhost:8088/api/issues')
       .then(response => {
+        this.numberPages = response.data.length / 4
         this.issues = response.data
       }).catch(e => {
         console.log(e)
@@ -63,6 +69,9 @@ li {
 
 a {
   color: #42b983;
+}
+
+.item {
 }
 
 </style>
