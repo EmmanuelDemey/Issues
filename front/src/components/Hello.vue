@@ -11,9 +11,12 @@
     :page-range="4"
     :initial-page="0"
     :container-class="'ui pagination menu'"
+    :prev-text="'Précédant'"
+    :next-text="'Suivant'"
     :page-link-class="'item'"
     :prev-link-class="'item'"
     :next-link-class="'item'"
+    :click-handler="goToPage"
     :no-li-surround="true">
     </paginate>
   </div>
@@ -32,7 +35,8 @@ export default {
     'paginate': VuejsPaginate
   },
   data: () => ({
-    issues: []
+    issues: [],
+    numberPages: 1
   }),
   created () {
     this.loadData()
@@ -41,7 +45,23 @@ export default {
     loadData () {
       axios.get('http://localhost:8088/api/issues')
       .then(response => {
-        this.numberPages = response.data.length / 4
+        this.numberPages = parseInt(response.data.length / 4)
+      })
+      this.getPagingList(1)
+    },
+    goToPage (pageNum) {
+      console.log(pageNum)
+      this.getPagingList(pageNum)
+    },
+    getPagingList (pageNum) {
+      axios.get('http://localhost:8088/api/issues',
+        {
+          params: {
+            page: pageNum,
+            size: 4
+          }
+        })
+      .then(response => {
         this.issues = response.data
       }).catch(e => {
         console.log(e)

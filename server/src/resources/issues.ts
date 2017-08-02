@@ -3,7 +3,7 @@ import * as mongoose from "mongoose";
 
 const uuidv4 = require("uuid/v4");
 
-exports.getAll = function(page = 0, size = 10, callback: (err: any) => void) {
+exports.getAll = function(page = 0, size = 4, callback: (err: any) => void) {
   IssueModel.find({}, {}, { skip: page * size, limit: size }, callback);
 };
 
