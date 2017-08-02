@@ -1,13 +1,7 @@
 <template>
   <div class="mdl-layout__tab-panel is-active" id="overview">
-    <!--
-    REVIEW: Es-tu obligé d'ajouter un div ici ? peux tu pas mettre le v-for
-    sur ton composant issue-presentation
-  -->
-    <div v-for="issue in issues">
-        <issue-presentation :issue="issue"></issue-presentation>
-      </br>
-    </div>
+    <issue-presentation  v-for="issue in issues" :issue="issue"></issue-presentation>
+    <br>
     <paginate
     :page-count="numberPages"
     :margin-pages="4"
@@ -21,8 +15,8 @@
     :prev-link-class="'item'"
     :next-link-class="'item'"
     :no-li-surround="true">
-    </paginate>
-  </div>
+  </paginate>
+</div>
 </template>
 
 <script>
@@ -31,7 +25,7 @@ import axios from 'axios'
 import VuejsPaginate from 'vuejs-paginate'
 
 export default {
-  name: 'hello',
+  name: 'IssueManager',
   components: {
     'issue-presentation': presentation,
     'paginate': VuejsPaginate
