@@ -13,10 +13,10 @@
     :container-class="'ui pagination menu'"
     :prev-text="'Précédant'"
     :next-text="'Suivant'"
+    :click-handler="goToPage"
     :page-link-class="'item'"
     :prev-link-class="'item'"
     :next-link-class="'item'"
-    :click-handler="goToPage"
     :no-li-surround="true">
     </paginate>
   </div>
@@ -50,7 +50,6 @@ export default {
       this.getPagingList(1)
     },
     goToPage (pageNum) {
-      console.log(pageNum)
       this.getPagingList(pageNum)
     },
     getPagingList (pageNum) {
