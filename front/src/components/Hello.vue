@@ -1,6 +1,9 @@
 <template>
-  <div class="hello">
   <div class="mdl-layout__tab-panel is-active" id="overview">
+    <!--
+    REVIEW: Es-tu obligé d'ajouter un div ici ? peux tu pas mettre le v-for
+    sur ton composant issue-presentation
+  -->
     <div v-for="issue in issues">
         <issue-presentation :issue="issue"></issue-presentation>
       </br>
@@ -19,7 +22,6 @@
     :next-link-class="'item'"
     :no-li-surround="true">
     </paginate>
-  </div>
   </div>
 </template>
 
@@ -43,17 +45,13 @@ export default {
   },
   methods: {
     loadData () {
-      axios.get('http://localhost:8088/api/issues')
-      .then(response => {
-        this.numberPages = parseInt(response.data.length / 4)
-      })
       this.getPagingList(1)
     },
     goToPage (pageNum) {
       this.getPagingList(pageNum)
     },
     getPagingList (pageNum) {
-      axios.get('http://localhost:8088/api/issues',
+      axios.get('/api/issues',
         {
           params: {
             page: pageNum,
@@ -61,7 +59,8 @@ export default {
           }
         })
       .then(response => {
-        this.issues = response.data
+        this.issues = response.data.docs
+        this.numberPages = response.data.pages
       }).catch(e => {
         console.log(e)
       })
@@ -88,9 +87,6 @@ li {
 
 a {
   color: #42b983;
-}
-
-.item {
 }
 
 </style>

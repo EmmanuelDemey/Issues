@@ -4,7 +4,7 @@ import * as mongoose from "mongoose";
 const uuidv4 = require("uuid/v4");
 
 exports.getAll = function(page = 0, size = 4, callback: (err: any) => void) {
-  IssueModel.find({}, {}, { skip: page * size, limit: size }, callback);
+  IssueModel.paginate({}, { page: page, limit: size }, callback);
 };
 
 exports.getById = function(id: string, callback: (err: any) => void) {

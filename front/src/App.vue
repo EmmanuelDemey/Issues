@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <div id="app" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
       <div class="mdl-layout--large-screen-only mdl-layout__header-row">
       </div>
@@ -26,8 +25,6 @@
     </main>
     <issue-footer></issue-footer>
   </div>
-
-  </div>
 </template>
 
 <script>
@@ -47,6 +44,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50; 
+  color: #2c3e50;
 }
 </style>
