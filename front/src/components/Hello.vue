@@ -41,12 +41,9 @@ export default {
     numberPages: 1
   }),
   created () {
-    this.loadData()
+    this.getPagingList(1)
   },
   methods: {
-    loadData () {
-      this.getPagingList(1)
-    },
     goToPage (pageNum) {
       this.getPagingList(pageNum)
     },

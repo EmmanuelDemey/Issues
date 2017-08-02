@@ -7,19 +7,23 @@
         <div class="mdl-card__supporting-text">
           <h4>{{issue.label}}</h4>
           {{issue.description}}
-        </div>
-        <div class="mdl-card__actions">
+          <h6>
+            {{issue.applicationUrl}}
+          </h6>
+          </div>
+
+        <!--div class="mdl-card__actions">
           <a href="#" class="mdl-button">Read our features</a>
-        </div>
+        </div-->
       </div>
-      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
+      <!--button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
         <i class="material-icons">more_vert</i>
       </button>
       <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn1">
         <li class="mdl-menu__item">Lorem</li>
         <li class="mdl-menu__item" disabled>Ipsum</li>
         <li class="mdl-menu__item">Dolor</li>
-      </ul>
+      </ul-->
     </section>
 </template>
 
